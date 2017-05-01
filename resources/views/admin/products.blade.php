@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('商品列表', 'Page Title')
+@section('title', '商品列表')
 
 @section('sidebar')
     @parent

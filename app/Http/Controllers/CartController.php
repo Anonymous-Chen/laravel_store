@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\CartItem;
+use App\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -38,6 +40,8 @@ class CartController extends Controller
     }
 
     public function showCart(){
+
+
         $cart = Cart::where('user_id',Auth::user()->id)->first();
 
         if(!$cart){
@@ -57,8 +61,11 @@ class CartController extends Controller
 
     public function removeItem($id){
 
+        $cartitem = CartItem::find($id);
+        $product = Product::where('id',$cartitem->product_id )->first();
         CartItem::destroy($id);
-        return redirect('/cart');
+        return redirect('/cart')->with('success','删除成功-'.$product->name);
+
     }
 
 }

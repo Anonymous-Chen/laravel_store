@@ -15,7 +15,8 @@ class MainController extends Controller
     //
     public function index()
     {
-        $products = Product::all();
+
+        $products = Product::paginate(9);
         return view('main.index',['products' => $products]);
 
     }
